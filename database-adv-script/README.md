@@ -21,3 +21,12 @@ FULL OUTER JOIN
 Objective
 
 The aim of this task is to show the ability to form complex queries which include different type of joins that will help in data analysis and reporting functionality of backend system.
+ Subqueries
+
+ 1. Non-Correlated Subquery:
+- Fetches all properties with an average review rating bigger than 4.0.
+- Uses a sub-query that runs separately from the outer query to find average ratings.
+
+2. Correlated Subquery:
+- Users who have made more than 3 bookings.
+- The subquery will be executed on per row basis in the outer query while taking the current user id.
