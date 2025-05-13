@@ -1,7 +1,3 @@
-# Index Performance Analysis
-
-## Objective
-To improve query execution speed by creating indexes on frequently accessed columns used in JOINs, WHERE, and ORDER BY clauses.
 
 ## Indexes Created
 1. `idx_users_id` on `users(id)`
