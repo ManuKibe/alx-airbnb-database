@@ -1,7 +1,4 @@
--- Initial query to retrieve all bookings with user, property, and payment details
--- This version may be slow due to complex joins and lack of indexing
 
--- EXPLAIN ANALYZE for performance insights
 EXPLAIN ANALYZE
 SELECT 
     b.id AS booking_id,
@@ -15,10 +12,11 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.id
 JOIN properties p ON b.property_id = p.id
-LEFT JOIN payments pay ON b.id = pay.booking_id;
+LEFT JOIN payments pay ON b.id = pay.booking_id
+WHERE b.status = 'active'
+AND pay.status = 'completed';
 
--- Optimized query: assume indexing on user_id, property_id, booking_id
--- Removed redundant fields and joins based on usage
+-- Optimized query: reduced fields, used WHERE and AND for filtering
 
 EXPLAIN ANALYZE
 SELECT 
@@ -30,4 +28,6 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.id
 JOIN properties p ON b.property_id = p.id
-LEFT JOIN payments pay ON b.id = pay.booking_id;
+LEFT JOIN payments pay ON b.id = pay.booking_id
+WHERE b.status = 'active'
+AND pay.status = 'completed';
