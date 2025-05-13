@@ -18,6 +18,7 @@ FULL OUTER JOIN
    - Fetches all users, as well as all bookings.
    – Contains users without bookings and bookings that much not be linked to users.
 
+
 Objective
 
 The aim of this task is to show the ability to form complex queries which include different type of joins that will help in data analysis and reporting functionality of backend system.
@@ -30,3 +31,14 @@ The aim of this task is to show the ability to form complex queries which includ
 2. Correlated Subquery:
 - Users who have made more than 3 bookings.
 - The subquery will be executed on per row basis in the outer query while taking the current user id.
+- Aggregations and Window Functions
+  
+
+ 1. Aggregation:
+- The first query calculates the total number of bookings each user has made.
+- It uses `COUNT()` in combination with `GROUP BY` on `user_id`.
+
+2. Window Function:
+- The second query ranks properties by the number of bookings using the `RANK()` window function.
+- Properties with the same number of bookings receive the same rank.
+- This is useful for leaderboard-style rankings of most-booked properties.
