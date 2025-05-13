@@ -1,14 +1,21 @@
+# Index Performance Analysis
 
-CREATE INDEX idx_users_id ON users(id);
+## Objective
+To improve query execution speed by creating indexes on frequently accessed columns used in JOINs, WHERE, and ORDER BY clauses.
 
--- Create index on bookings.user_id (frequent JOIN/WHERE)
-CREATE INDEX idx_bookings_user_id ON bookings(user_id);
+## Indexes Created
+1. `idx_users_id` on `users(id)`
+2. `idx_bookings_user_id` on `bookings(user_id)`
+3. `idx_bookings_property_id` on `bookings(property_id)`
+4. `idx_properties_id` on `properties(id)`
+5. `idx_bookings_created_at` on `bookings(created_at)`
 
--- Create index on bookings.property_id (used in JOINs)
-CREATE INDEX idx_bookings_property_id ON bookings(property_id);
+## Performance Measurement
 
--- Create index on properties.id (used in JOINs and primary lookups)
-CREATE INDEX idx_properties_id ON properties(id);
-
--- Create index on bookings.created_at (useful for date range queries)
-CREATE INDEX idx_bookings_created_at ON bookings(created_at);
+### Sample Query (Before Indexes)
+```sql
+EXPLAIN ANALYZE
+SELECT u.name, COUNT(b.id)
+FROM users u
+JOIN bookings b ON u.id = b.user_id
+GROUP BY u.name;
